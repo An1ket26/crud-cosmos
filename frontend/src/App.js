@@ -8,7 +8,7 @@ function App() {
     const [name,setName]=useState("");
     const [desg,setDesg]=useState("");
     const getEmployee = async () => {
-      const res = await fetch("http://localhost:5000/getemp");
+      const res = await fetch("http://localhost:5000/api/emp/getemp");
       const data = await res.json();
       console.log(data);
       setEmployee(data);
@@ -17,9 +17,9 @@ function App() {
         getEmployee();
     }, [])
 
-    const insertEmp=()=>{
+    const insertEmp=async()=>{
       var data={name,desg};
-      var res = fetch("http://localhost:5000/addemp",{
+      await fetch("http://localhost:5000/api/emp/addemp",{
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -33,8 +33,8 @@ function App() {
       setInsert(false);
     }
 
-    const deleteEmp=(id)=>{
-      var res = fetch("http://localhost:5000/deleteemp",{
+    const deleteEmp=async(id)=>{
+      await fetch("http://localhost:5000/api/emp/deleteemp",{
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -46,9 +46,9 @@ function App() {
        
     }
 
-    const updateEmp=(id)=>{
+    const updateEmp=async(id)=>{
       const data={id,name,desg};
-      var res = fetch("http://localhost:5000/updateemp",{
+      await fetch("http://localhost:5000/api/emp/updateemp",{
         method: "PUT",
         headers: {
           "Content-type": "application/json",
